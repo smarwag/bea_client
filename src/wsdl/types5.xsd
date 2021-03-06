@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<xsd:schema
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:beadto1="http://brak.de/bea/application/dto/soap/dto1"
+            xmlns:beadto2="http://brak.de/bea/application/dto/soap/dto2"
+            xmlns:beadto3="http://brak.de/bea/application/dto/soap/dto3"
+            xmlns:beadto4="http://brak.de/bea/application/dto/soap/dto4"
+            xmlns:beadto5="http://brak.de/bea/application/dto/soap/dto5"
+			attributeFormDefault="qualified"
+			elementFormDefault="qualified"
+			targetNamespace="http://brak.de/bea/application/dto/soap/types5">
+
+    <xsd:import namespace="http://brak.de/bea/application/dto/soap/dto1" schemaLocation="dto1.xsd"/>
+    <xsd:import namespace="http://brak.de/bea/application/dto/soap/dto2" schemaLocation="dto2.xsd"/>
+    <xsd:import namespace="http://brak.de/bea/application/dto/soap/dto3" schemaLocation="dto3.xsd"/>
+    <xsd:import namespace="http://brak.de/bea/application/dto/soap/dto4" schemaLocation="dto4.xsd"/>
+    <xsd:import namespace="http://brak.de/bea/application/dto/soap/dto5" schemaLocation="dto5.xsd"/>
+
+    <xsd:element name="createSessionKeyRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="createSessionKeyResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionKey" type="beadto5:SessionKeySoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getAddressbookRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getAddressbookResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="addressbook" type="beadto5:IdentityListSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Eine Liste aller Identitäten welche in dem Adressbuch des zur Session gehörigen Benutzers stehen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteAddressbookEntryRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="addressbookEntrySafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Benutzers welchers aus dem Adressbuch gelöscht werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteAddressbookEntryResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="addressbookEntryDeleted" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn der Adressbuch-Eintrag gelöscht wurde. "false": wenn der Adressbuch-Eintrag nicht gelöscht wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addAddressbookEntryRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="identitySafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Benutzers welcher dem Adressbuch hinzugefügt werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addAddressbookEntryResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="addressbookEntryAdded" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn der Adressbuch-Eintrag hinzugefügt wurde. "false": wenn der Adressbuch-Eintrag nicht hinzugefügt wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getMessageRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachrichten-Id der zu holenden Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="markAsExport" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Nachricht als exportiert markiert werden soll. "false": wenn die Nachricht nicht als exportiert markiert werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getMessageResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="message" type="beadto5:MessageSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die verschlüsselte, angefragte Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="createNewMessageRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Postfachbesitzers für dessen Postfach eine Nachricht erstellt werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="createNewMessageResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="message" type="beadto5:MessageSoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die verschlüsselte, erstellte Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="loginUserRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die vorläufige Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="samlResponse" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das zu validierende SAML-Token.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="authCertificate" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Zertifikat welches zu Anmeldung verwendet werden soll (Sicherheits-Token).</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="loginUserResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionKey" type="beadto5:SessionKeySoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der verschlüsselte Session Key für die aktuelle Session.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="logoutUserRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der Session welche geschlossen werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="logoutUserResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="logoutSuccessful" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn das ausloggen erfolgreich war. "false": wenn das ausloggen nicht erfolgreich war.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="startLoginUserRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="authtificationType" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Authentifizierungs-Typ welcher für das Login benutzt werden soll.</xsd:documentation></xsd:annotation>
+                	<xsd:simpleType>
+						<xsd:restriction base="beadto1:AuthentificationTypeSoapDTO" />
+					</xsd:simpleType> 
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="startLoginUserResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Eine vorläufige Id der Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="samlRequest" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der SAML Request welcher zur Authentifizierung benötigt wird.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="finishRegistrationRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+
+                <xsd:element name="securityToken" type="beadto1:SecurityTokenSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Sicherheits-Token welches für den Benutzer hinterlegt werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="signedPrivilege" type="beadto1:SignedPrivilegeSoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Das signierte Recht für die Freischaltung des Sicherheits-Token auf dem Postfach.</xsd:documentation></xsd:annotation></xsd:element>
+
+                <xsd:element name="securityQuestion" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Eine Sicherheitsfrage.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="securityAnswer" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Antwort zur ausgewählten Sicherheitsfrage.</xsd:documentation></xsd:annotation></xsd:element>
+
+                <xsd:element name="email" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Email-Adresse des sich registrierenden Benutzers.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="finishRegistrationResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="finishRegistrationCompleted" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Registrierung abgeschlossen ist. "false": wenn die Registrierung nicht erfolgreich war.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="startRegistrationRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:choice>
+                    <xsd:element name="usernamePassword" type="beadto1:UsernamePasswordSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Registrierung eines Mitarbeiters: Die Benutzername/Passwort-Kombination des zu registrierenden Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+                    <xsd:element name="samlResponse" type="beadto1:SAMLResponseSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Registrierung einer beA-Karte: Eine SAML-Response. </xsd:documentation></xsd:annotation></xsd:element>
+                </xsd:choice>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="startRegistrationResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="securityQuestionList" type="xsd:string" maxOccurs="unbounded" minOccurs="1"><xsd:annotation><xsd:documentation>Eine Liste von möglichen Sicherheitsfragen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addAuthentificationRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="securityToken" type="beadto1:SecurityTokenSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Sicherheits-Token welcher dem Benutzer hinzugefügt werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addAuthentificationResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="authentificationAdded" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn das hinzufügen des Sicherheits-Token erfolgreich war. "false": wenn das hinzufügen des Sicherheits-Token nicht erfolgreich war.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteAuthentificationRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="securityTokenName" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des zu löschenden Sicherheits-Token.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteAuthentificationResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="authentificationDeleted" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn das löschen des Sicherheits-Token erfolgreich war. "false": wenn das löschen des Sicherheits-Token nicht erfolgreich war.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getUserJournalResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="userJournals" type="beadto5:JournalListSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Journal-Einträge des Nutzerjournal.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getUserJournalRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="identitySafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Benutzers für den das Nutzerjournal geholt werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="from" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Filter: Datum ab wann Nutzerjournal-Einträge geholt werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="until" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Filter: Datum bis wann Nutzerjournal-Einträge geholt werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getUserNameRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="identitySafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Benutzers für den der Benutzername geholt werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getUserNameResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der angeforderte Benutzername.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addUserRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Postfachbesitzers für dessen Postfach ein Mitarbeiter erstellt werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="gender" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Geschlecht des anzulegenden Mitarbeiters.</xsd:documentation></xsd:annotation>
+                	<xsd:simpleType>
+						<xsd:restriction base="beadto1:GenderSoapTypeDTO" />
+					</xsd:simpleType>  
+                </xsd:element>
+                <xsd:element name="title" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Titel des anzulegenden Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="firstname" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Vorname des anzulegenden Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="surname" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Nachname des anzulegenden Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addUserResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="newIdentity" type="beadto5:IdentitySoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Identität des neu angelegten Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="username" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Benutzername des neu angelegten Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="password" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das initiale Passwort des neu angelegten Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="updateUserRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="identitySafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des zu bearbeitenden Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="gender" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Geschlecht des zu bearbeitenden Mitarbeiters (falls es bearbeitet werden soll).</xsd:documentation></xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="beadto1:GenderSoapTypeDTO" />
+					</xsd:simpleType>                
+                </xsd:element>
+                <xsd:element name="title" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Titel des zu bearbeitenden Mitarbeiters (falls es bearbeitet werden soll).</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="firstname" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Vorname des zu bearbeitenden Mitarbeiters (falls es bearbeitet werden soll).</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="surname" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Nachname des zu bearbeitenden Mitarbeiters (falls es bearbeitet werden soll).</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="updateUserResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="userUpdated" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Bearbeitung des Mitarbeiters erfolgreich war. "false": wenn die Bearbeitung des Mitarbeiters nicht erfolgreich war.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteUserRequest">
+        <xsd:complexType>	
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="recieverIdentitySafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des zu löschenden Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteUserResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="userDeleted" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true: wenn der Mitarbeiter erfolgreich gelöscht wurde. "false": wenn der Mitarbeiter nicht gelöscht wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addAccessRightRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Postfachbesitzers für dessen Postfach ein Recht vergeben werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="reciverIdentitySafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Benutzers welcher ein Recht bekommen soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="privilege" maxOccurs="unbounded" minOccurs="1"><xsd:annotation><xsd:documentation>Das zu vergebene Recht.</xsd:documentation></xsd:annotation>
+                	<xsd:simpleType>
+						<xsd:restriction base="beadto5:PrivilegeTypeSoapDTO" />
+					</xsd:simpleType>     
+                </xsd:element>
+                <xsd:element name="from" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Datum ab dem das Recht gültig sein soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="until" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Datum bis wann ein Recht gültig sein soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addAccessRightResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="accessRightAdded" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn das Recht erfolgreich vergeben wurde. "false": wenn das Recht nicht vergeben wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="saveMessageRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="message" type="beadto5:MessageSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die zu speichernde Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="saveMessageResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="messageSaved" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Nachricht erfolgreich gespeichert wurde. "false": wenn die Nachricht nicht erfolgreich gespeichert wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="sendMessageRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="message" type="beadto5:MessageSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die zu versendende Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="sendMessageResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="messageSent" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Nachricht erfolgreich versandt wurde. "false": wenn die Nachricht nicht erfolgreich versandt wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getFolderStructureRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Postfachbesitzers für dessen Postfach die Ordnerstruktur geholt werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getFolderStructureResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="postbox" type="beadto5:PostboxSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Postfach mit der enthaltenen Ordnerstruktur. </xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getConfigurationRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getConfigurationResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="AuthentConfiguration" type="beadto5:AuthentConfigurationSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Konfigurationsdaten für die Durchführung einer SAML-Authentifizierung.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getPostboxesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getPostboxesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="postboxes" type="beadto5:PostboxesSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Postfächer auf denen der eingeloggte Benutzer das Recht "Nachrichtenübersicht öffnen" besitzt.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getRecipientDataRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="safeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Benutzers welcher als Empfänger geplant ist.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getRecipientDataResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="recipient" type="beadto1:RecipientSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der angeforderte Empfänger.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getIdentityDataRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="safeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Benutzers für den die Identitäts-Daten angefordert werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getIdentityDataResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="identity" type="beadto5:IdentitySoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Identität des angeforderten Benutzers.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getProcesscardsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="postboxSafeId" type="xsd:string"><xsd:annotation><xsd:documentation>Die SafeId des Postfachbesitzers für dessen Postfach die Laufzettel angefordert werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getProcesscardsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="processcards" type="beadto4:ProcessCardsSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Laufzettel des angeforderten Postfachs.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getVerificationResultRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der Nachricht für die das Signatur Prüfprotokoll angefordert werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getVerificationResultResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="verificationResult" type="beadto1:VerificationResultSoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Das Signatur Prüfprotokoll der angeforderten Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getVerificationConfigRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getVerificationConfigResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="verificationConfig" type="beadto1:VerificationConfigSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die für eine Signatur-Prüfung notwendigen Einstellungen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="setProcesscardsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="processcards" type="beadto4:ProcessCardsSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die entschlüsselten Laufzettel welche in das beA-System übertragen werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="setProcesscardsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="processcardsSaved" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Laufzettel erfolgreich gespeichert wurden. "false": wenn die Laufzettel nicht erfolgreich gespeichert wurden.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getMessageJournalRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachrichten-Id der Nachricht für die das Nachrichtenjournal angefordert werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="from" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Filter: Datum ab wann Nachrichtenjournal-Einträge geholt werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="until" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Filter: Datum bis wann Nachrichtenjournal-Einträge geholt werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getMessageJournalResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="messageJournals" type="beadto5:JournalListSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Journal-Einträge des Nachrichtenjournal.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getPostboxJournalRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Postfachbesitzers für dessen Postfach das Postfachjournal angefordert werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="from" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Filter: Datum ab wann Postfachjournal-Einträge geholt werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="until" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Filter: Datum bis wann Postfachjournal-Einträge geholt werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getPostboxJournalResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="postboxJournals" type="beadto5:JournalListSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Journal-Einträge des Postfachjournal.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteAccessRightRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Postfachbesitzers für dessen Postfach einem Benutzer ein Recht entzogen werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="recieverIdentitySafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Benutzers dem ein Recht entzogen werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="privilege" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Recht welches entzogen werden soll.</xsd:documentation></xsd:annotation>
+                	<xsd:simpleType>
+						<xsd:restriction base="beadto5:PrivilegeTypeSoapDTO" />
+					</xsd:simpleType>  
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteAccessRightResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="accessRightDeleted" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn das Recht erfolgreich entzogen worden ist. "false": wenn das Recht nicht erfolgreich entzogen worden ist.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="removeCommentRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachrichten-Id der Nachricht an der ein Kommentar gelöscht werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="commentId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id des Kommentars welcher gelöscht werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="removeCommentResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="commentRemoved" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn der Kommentar erfolgreich gelöscht wurde. "false": wenn der Kommentar nicht erfolgreich gelöscht wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="updateCommentRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="comment" type="beadto2:CommentSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der zu speichernde, bearbeitete Kommentar.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="updateCommentResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="commentUpdated" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn der Kommentar erfolgreich bearbeitet wurde. "false": wenn der Kommentar nicht erfolgreich bearbeitet wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getFolderOverviewRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="folderId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id des Ordners für den die Nachrichtenübersicht angefordert werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="onlyNew" type="xsd:boolean" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>"true": es werden lediglich neue Nachrichten angefordert. "false": es werden alle Nachrichten angefordert.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getFolderOverviewResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="folderOverview" type="beadto5:FolderOverviewSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die angeforderte Nachrichtenübersicht.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="searchAddresseeRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="addresseeSearchParameter" type="beadto4:SearchAddresseeSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Suchparamter: mind. 2, jeder Parameter ist mind. 2 Zeichen lang.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="searchAddresseeResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="addressees" type="beadto5:IdentityListSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Adressaten welche mit den übergebenen Suchparametern übereinstimmen.</xsd:documentation></xsd:annotation></xsd:element>
+            	<xsd:element name="warningMessages" type="xsd:string" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Eine Liste von Warn-Hinweisen die zu unvollständigen Suchergebnissen führen können.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getFavouriteAddresseeRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getFavouriteAddresseeResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="favouriteAddressees" type="beadto5:IdentityListSoapDTO"><xsd:annotation><xsd:documentation>Alle Adressaten in der Liste der favorisierten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteFavouriteAddresseeRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="favouriteIdentitySafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Benutzers welcher aus der Liste der favorisierten Adressaten gelöscht werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteFavouriteAddresseeResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="favouriteDeleted" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn der Benutzer erfolgreich aus der Liste der favorisierten Adressaten gelöscht wurde. "false": wenn der Benutzer nicht erfolgreich aus der Liste der favorisierten Adressaten gelöscht wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="moveMessageToFolderRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachrichten-Id der Nachricht welche verschoben werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="folderId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id des Ordners in den die Nachricht verschoben werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="moveMessageToFolderResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="messageMoved" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Nachricht erfolgreich verschoben wurde. "false": wenn die Nachricht nicht erfolgreich verschoben wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="moveMessageToTrashRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachrichten-Id der Nachricht welche in den Papierkorb verschoben werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="moveMessageToTrashResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="messageMoved" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Nachricht erfolgreich in den Papierkorb verschoben wurde. "false": wenn die Nachricht nicht erfolgreich in den Papierkorb verschoben wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="restoreMessageFromTrashRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachrichten-Id der Nachricht welche aus dem Papierkorb wiederhergestellt werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="restoreMessageFromTrashResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="messageRestored" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Nachricht erfolgreich aus dem Papierkorb wiederhergestellt wurde. "false": wenn die Nachricht nicht erfolgreich aus dem Papierkorb wiederhergestellt wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteMessageRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachrichten-Id der Nachricht welche gelöscht werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="deleteMessageResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="messageDeleted" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Nachricht erfolgreich gelöscht wurde."false": wenn die Nachricht nicht erfolgreich gelöscht wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addFolderRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="folderName" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des neu zu erstellenden Ordners.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="parentFolderId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id des Ordners in dem der neue Ordner erstellt werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addFolderResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="newFolder" type="beadto1:FolderSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der neu erstellte Ordner.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="updateFolderRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="folderId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id des Ordners welcher bearbeitet werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="newFolderName" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Name des zu bearbeitenden Ordners (falls dieser bearbeitet werden soll).</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="newParentFolderId" type="xsd:long" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Id des Ordners in dem der zu bearbeitende Ordner enthalten sein soll (falls dieser bearbeitet werden soll).</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="updateFolderResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="folderUpdated" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn der Ordner erfolgreich bearbeitet wurde. "false": wenn der Ordner nicht erfolgreich bearbeitet wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="removeFolderRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="folderId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id des Ordners welcher gelöscht werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="removeFolderResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="folderRemoved" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn der Ordner erfolgreich gelöscht wurde. "false": wenn der Ordner nicht erfolgreich gelöscht wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addCommentRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="comment" type="beadto2:CommentSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der zu erstellende Kommentar - die Kommentar-Id muss nicht gefüllt werden.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="addCommentResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="newComment" type="beadto2:CommentSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der neu erstellte Kommentar - die Kommentar-Id wurde vom System gesetzt.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getMessageConfigRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getMessageConfigResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="messageConfig" type="beadto1:MessageConfigurationSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachrichten-Konfiguration.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="activateAuthenticationRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Postfachbesitzers für dessen Postfach ein neuer Sicherheits-Token freigeschaltet werden soll.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="securityToken" type="beadto1:SecurityTokenSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der freizuschaltende Sicherheits-Token.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="signedPrivilege" type="beadto1:SignedPrivilegeSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das für das Sicherheits-Token und das Postfach signierte Recht für die Freischaltung.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="activateAuthenticationResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="authenticationActivated" type="xsd:boolean"><xsd:annotation><xsd:documentation>"true": wenn der Sicherheits-Token erfolgreich freigeschaltet wurde. "false": wenn der Sicherheits-Token nicht erfolgreich freigeschaltet wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getUnactivatedSecurityTokensRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId des Postfachbesitzers für dessen Postfach die noch nicht freigeschalteten Sicherheits-Token angefordert werden sollen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="getUnactivatedSecurityTokensResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="securityTokens" type="beadto1:SecurityTokenSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Die noch nicht freigeschalteten Sicherheits-Token des angeforderten Postfachs.</xsd:documentation></xsd:annotation></xsd:element>
+                <xsd:element name="version" type="xsd:int" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Version des zu erstellenden Signaturobjektes für die Rechtevergabe.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="getAccessRightsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+            	<xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="getAccessRightsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+            	<xsd:element name="accessRights" type="beadto5:AccessRightListSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Eine Liste von Berechtigungen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="getAccessRightsGrantedRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+            	<xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="getAccessRightsGrantedResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+            	<xsd:element name="accessRights" type="beadto5:AccessRightListSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Eine Liste von Berechtigungen.</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="getMessageOverviewRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+            	<xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der zum aktuellen Login gehörigen Session.</xsd:documentation></xsd:annotation></xsd:element>
+            	<xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachrichten-Id .</xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="getMessageOverviewResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+            	<xsd:element name="messageOverview" type="beadto5:MessageOverviewSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation></xsd:documentation></xsd:annotation></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

@@ -1,0 +1,1599 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions 
+	name="beA" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://brak.de/bea/application/dto/soap/types5"
+	xmlns:beatns="http://brak.de/bea/application/dto/soap/types5"
+	xmlns:beadto1="http://brak.de/bea/application/dto/soap/dto1"
+	xmlns:beadto2="http://brak.de/bea/application/dto/soap/dto2"
+	xmlns:beadto3="http://brak.de/bea/application/dto/soap/dto3"
+	xmlns:beadto4="http://brak.de/bea/application/dto/soap/dto4"
+	xmlns:beadto5="http://brak.de/bea/application/dto/soap/dto5"
+	targetNamespace="http://brak.de/bea/application/dto/soap/types5">
+	
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://brak.de/bea/application/dto/soap/types5" schemaLocation="types5.xsd"/>	
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="BeaFault">
+		<wsdl:part name="BeaFault" type="beadto1:BeAFaultSoapDTO"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="getMessageRequest">
+		<wsdl:part name="parameters" element="beatns:getMessageRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getMessageResponse">
+		<wsdl:part name="parameters" element="beatns:getMessageResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="createSessionKeyRequest">
+		<wsdl:part name="parameters" element="beatns:createSessionKeyRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="createSessionKeyResponse">
+		<wsdl:part name="parameters" element="beatns:createSessionKeyResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="createNewMessageRequest">
+		<wsdl:part name="parameters" element="beatns:createNewMessageRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="createNewMessageResponse">
+		<wsdl:part name="parameters" element="beatns:createNewMessageResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="saveMessageRequest">
+		<wsdl:part name="parameters" element="beatns:saveMessageRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="saveMessageResponse">
+		<wsdl:part name="parameters" element="beatns:saveMessageResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="sendMessageRequest">
+		<wsdl:part name="parameters" element="beatns:sendMessageRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="sendMessageResponse">
+		<wsdl:part name="parameters" element="beatns:sendMessageResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getFolderStructureRequest">
+		<wsdl:part name="parameters" element="beatns:getFolderStructureRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getFolderStructureResponse">
+		<wsdl:part name="parameters" element="beatns:getFolderStructureResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getFolderOverviewRequest">
+		<wsdl:part name="parameters" element="beatns:getFolderOverviewRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getFolderOverviewResponse">
+		<wsdl:part name="parameters" element="beatns:getFolderOverviewResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="searchAddresseeRequest">
+		<wsdl:part name="parameters" element="beatns:searchAddresseeRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="searchAddresseeResponse">
+		<wsdl:part name="parameters" element="beatns:searchAddresseeResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getFavouriteAddresseeRequest">
+		<wsdl:part name="parameters" element="beatns:getFavouriteAddresseeRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getFavouriteAddresseeResponse">
+		<wsdl:part name="parameters" element="beatns:getFavouriteAddresseeResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteFavouriteAddresseeRequest">
+		<wsdl:part name="parameters" element="beatns:deleteFavouriteAddresseeRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteFavouriteAddresseeResponse">
+		<wsdl:part name="parameters" element="beatns:deleteFavouriteAddresseeResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="moveMessageToFolderRequest">
+		<wsdl:part name="parameters" element="beatns:moveMessageToFolderRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="moveMessageToFolderResponse">
+		<wsdl:part name="parameters" element="beatns:moveMessageToFolderResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="moveMessageToTrashRequest">
+		<wsdl:part name="parameters" element="beatns:moveMessageToTrashRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="moveMessageToTrashResponse">
+		<wsdl:part name="parameters" element="beatns:moveMessageToTrashResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="restoreMessageFromTrashRequest">
+		<wsdl:part name="parameters" element="beatns:restoreMessageFromTrashRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="restoreMessageFromTrashResponse">
+		<wsdl:part name="parameters" element="beatns:restoreMessageFromTrashResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteMessageRequest">
+		<wsdl:part name="parameters" element="beatns:deleteMessageRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteMessageResponse">
+		<wsdl:part name="parameters" element="beatns:deleteMessageResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addFolderRequest">
+		<wsdl:part name="parameters" element="beatns:addFolderRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addFolderResponse">
+		<wsdl:part name="parameters" element="beatns:addFolderResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="updateFolderRequest">
+		<wsdl:part name="parameters" element="beatns:updateFolderRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="updateFolderResponse">
+		<wsdl:part name="parameters" element="beatns:updateFolderResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="removeFolderRequest">
+		<wsdl:part name="parameters" element="beatns:removeFolderRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="removeFolderResponse">
+		<wsdl:part name="parameters" element="beatns:removeFolderResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addCommentRequest">
+		<wsdl:part name="parameters" element="beatns:addCommentRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addCommentResponse">
+		<wsdl:part name="parameters" element="beatns:addCommentResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="updateCommentRequest">
+		<wsdl:part name="parameters" element="beatns:updateCommentRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="updateCommentResponse">
+		<wsdl:part name="parameters" element="beatns:updateCommentResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="removeCommentRequest">
+		<wsdl:part name="parameters" element="beatns:removeCommentRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="removeCommentResponse">
+		<wsdl:part name="parameters" element="beatns:removeCommentResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="loginUserRequest">
+		<wsdl:part name="parameters" element="beatns:loginUserRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="loginUserResponse">
+		<wsdl:part name="parameters" element="beatns:loginUserResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="logoutUserRequest">
+		<wsdl:part name="parameters" element="beatns:logoutUserRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="logoutUserResponse">
+		<wsdl:part name="parameters" element="beatns:logoutUserResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="startLoginUserRequest">
+		<wsdl:part name="parameters" element="beatns:startLoginUserRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="startLoginUserResponse">
+		<wsdl:part name="parameters" element="beatns:startLoginUserResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addUserRequest">
+		<wsdl:part name="parameters" element="beatns:addUserRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addUserResponse">
+		<wsdl:part name="parameters" element="beatns:addUserResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="updateUserRequest">
+		<wsdl:part name="parameters" element="beatns:updateUserRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="updateUserResponse">
+		<wsdl:part name="parameters" element="beatns:updateUserResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteUserRequest">
+		<wsdl:part name="parameters" element="beatns:deleteUserRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteUserResponse">
+		<wsdl:part name="parameters" element="beatns:deleteUserResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addAccessRightRequest">
+		<wsdl:part name="parameters" element="beatns:addAccessRightRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addAccessRightResponse">
+		<wsdl:part name="parameters" element="beatns:addAccessRightResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteAccessRightRequest">
+		<wsdl:part name="parameters" element="beatns:deleteAccessRightRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteAccessRightResponse">
+		<wsdl:part name="parameters" element="beatns:deleteAccessRightResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getPostboxJournalRequest">
+		<wsdl:part name="parameters" element="beatns:getPostboxJournalRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getPostboxJournalResponse">
+		<wsdl:part name="parameters" element="beatns:getPostboxJournalResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getMessageJournalRequest">
+		<wsdl:part name="parameters" element="beatns:getMessageJournalRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getMessageJournalResponse">
+		<wsdl:part name="parameters" element="beatns:getMessageJournalResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getUserNameRequest">
+		<wsdl:part name="parameters" element="beatns:getUserNameRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getUserNameResponse">
+		<wsdl:part name="parameters" element="beatns:getUserNameResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getUserJournalRequest">
+		<wsdl:part name="parameters" element="beatns:getUserJournalRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getUserJournalResponse">
+		<wsdl:part name="parameters" element="beatns:getUserJournalResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteAuthentificationRequest">
+		<wsdl:part name="parameters" element="beatns:deleteAuthentificationRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteAuthentificationResponse">
+		<wsdl:part name="parameters" element="beatns:deleteAuthentificationResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addAuthentificationRequest">
+		<wsdl:part name="parameters" element="beatns:addAuthentificationRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addAuthentificationResponse">
+		<wsdl:part name="parameters" element="beatns:addAuthentificationResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="startRegistrationRequest">
+		<wsdl:part name="parameters" element="beatns:startRegistrationRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="startRegistrationResponse">
+		<wsdl:part name="parameters" element="beatns:startRegistrationResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="finishRegistrationRequest">
+		<wsdl:part name="parameters" element="beatns:finishRegistrationRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="finishRegistrationResponse">
+		<wsdl:part name="parameters" element="beatns:finishRegistrationResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getAddressbookRequest">
+		<wsdl:part name="parameters" element="beatns:getAddressbookRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getAddressbookResponse">
+		<wsdl:part name="parameters" element="beatns:getAddressbookResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteAddressbookEntryRequest">
+		<wsdl:part name="parameters" element="beatns:deleteAddressbookEntryRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="deleteAddressbookEntryResponse">
+		<wsdl:part name="parameters" element="beatns:deleteAddressbookEntryResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addAddressbookEntryRequest">
+		<wsdl:part name="parameters" element="beatns:addAddressbookEntryRequest">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="addAddressbookEntryResponse">
+		<wsdl:part name="parameters" element="beatns:addAddressbookEntryResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getPostboxesRequest">
+		<wsdl:part name="parameters" element="beatns:getPostboxesRequest"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getPostboxesResponse">
+		<wsdl:part name="parameters" element="beatns:getPostboxesResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getConfigurationRequest">
+		<wsdl:part name="parameters" element="beatns:getConfigurationRequest"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getConfigurationResponse">
+		<wsdl:part name="parameters" element="beatns:getConfigurationResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getRecipientDataRequest">
+		<wsdl:part name="parameters" element="beatns:getRecipientDataRequest"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getRecipientDataResponse">
+		<wsdl:part name="parameters" element="beatns:getRecipientDataResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getIdentityDataRequest">
+		<wsdl:part name="parameters" element="beatns:getIdentityDataRequest"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getIdentityDataResponse">
+		<wsdl:part name="parameters" element="beatns:getIdentityDataResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getProcesscardsRequest">
+		<wsdl:part name="parameters" element="beatns:getProcesscardsRequest"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getProcesscardsResponse">
+		<wsdl:part name="parameters" element="beatns:getProcesscardsResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="setProcesscardsRequest">
+		<wsdl:part name="parameters" element="beatns:setProcesscardsRequest"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="setProcesscardsResponse">
+		<wsdl:part name="parameters" element="beatns:setProcesscardsResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getVerificationResultRequest">
+		<wsdl:part name="parameters" element="beatns:getVerificationResultRequest"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getVerificationResultResponse">
+		<wsdl:part name="parameters" element="beatns:getVerificationResultResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getVerificationConfigRequest">
+		<wsdl:part name="parameters" element="beatns:getVerificationConfigRequest"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getVerificationConfigResponse">
+		<wsdl:part name="parameters" element="beatns:getVerificationConfigResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getMessageConfigRequest">
+		<wsdl:part name="parameters" element="beatns:getMessageConfigRequest"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getMessageConfigResponse">
+		<wsdl:part name="parameters" element="beatns:getMessageConfigResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="activateAuthenticationRequest">
+		<wsdl:part name="parameters" element="beatns:activateAuthenticationRequest"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="activateAuthenticationResponse">
+		<wsdl:part name="parameters" element="beatns:activateAuthenticationResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="getUnactivatedSecurityTokensRequest">
+		<wsdl:part name="parameters" element="beatns:getUnactivatedSecurityTokensRequest"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="getUnactivatedSecurityTokensResponse">
+		<wsdl:part name="parameters" element="beatns:getUnactivatedSecurityTokensResponse"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="getAccessRightsRequest">
+		<wsdl:part name="parameters" element="beatns:getAccessRightsRequest"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="getAccessRightsResponse">
+		<wsdl:part name="parameters" element="beatns:getAccessRightsResponse"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="getAccessRightsGrantedRequest">
+		<wsdl:part name="parameters" element="beatns:getAccessRightsGrantedRequest"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="getAccessRightsGrantedResponse">
+		<wsdl:part name="parameters" element="beatns:getAccessRightsGrantedResponse"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="getMessageOverviewRequest">
+		<wsdl:part name="parameters" element="beatns:getMessageOverviewRequest"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="getMessageOverviewResponse">
+		<wsdl:part name="parameters" element="beatns:getMessageOverviewResponse"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:portType name="beAServiceV5PortType">
+		<wsdl:operation name="getMessage">
+			<wsdl:documentation>Holt eine Nachricht anhand ihrer Nachrichten-Id.</wsdl:documentation>
+			<wsdl:input message="beatns:getMessageRequest"></wsdl:input>
+			<wsdl:output message="beatns:getMessageResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="createNewMessage">
+			<wsdl:documentation>Erstellt eine neue Nachricht für ein Postfach anhand der SafeId des Postfachbesitzers.</wsdl:documentation>
+			<wsdl:input message="beatns:createNewMessageRequest"></wsdl:input>
+			<wsdl:output message="beatns:createNewMessageResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="saveMessage">
+			<wsdl:documentation>Speichert eine Nachricht.</wsdl:documentation>
+			<wsdl:input message="beatns:saveMessageRequest"></wsdl:input>
+			<wsdl:output message="beatns:saveMessageResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="sendMessage">
+			<wsdl:documentation>Sendet eine Nachricht. Die Nachricht muss vorher gespeichert werden.</wsdl:documentation>
+			<wsdl:input message="beatns:sendMessageRequest"></wsdl:input>
+			<wsdl:output message="beatns:sendMessageResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getFolderStructure">
+			<wsdl:documentation>Holt die Ordnerstruktur eines Postfaches anhand der SafeId des Postfachbesitzers.</wsdl:documentation>
+			<wsdl:input message="beatns:getFolderStructureRequest"></wsdl:input>
+			<wsdl:output message="beatns:getFolderStructureResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getFolderOverview">
+			<wsdl:documentation>Holt die Nachrichtenübersicht eines Ordners anhand der Id des Ordners. Die Anzahl der zurückgelieferten Einträge ist aktuell auf 1000 begrenzt.</wsdl:documentation>
+			<wsdl:input message="beatns:getFolderOverviewRequest"></wsdl:input>
+			<wsdl:output message="beatns:getFolderOverviewResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="searchAddressee">
+			<wsdl:documentation>Sucht einen Adressat anhand von mindestens zwei Suchparametern. Jeder Suchparameter muss aus mindestens zwei Zeichen bestehen.</wsdl:documentation>
+			<wsdl:input message="beatns:searchAddresseeRequest"></wsdl:input>
+			<wsdl:output message="beatns:searchAddresseeResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getFavouriteAddressee">
+			<wsdl:documentation>Holt eine Liste der favorisierten Adressaten des gerade eingeloggten Benutzers.</wsdl:documentation>
+			<wsdl:input message="beatns:getFavouriteAddresseeRequest"></wsdl:input>
+			<wsdl:output message="beatns:getFavouriteAddresseeResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteFavouriteAddressee">
+			<wsdl:documentation>Löscht einen favorisierten Adressaten (des gerade eingeloggten Benutzers) anhand der SafeId des Adressaten.</wsdl:documentation>
+			<wsdl:input message="beatns:deleteFavouriteAddresseeRequest"></wsdl:input>
+			<wsdl:output message="beatns:deleteFavouriteAddresseeResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="moveMessageToFolder">
+			<wsdl:documentation>Verschiebt eine Nachricht in einen Ordner anhand der Nachrichten-Id und der Id des Ordners in den die Nachricht verschoben werden soll. Ursprungs- und Zielordner müssen in demselben Postfach liegen.</wsdl:documentation>
+			<wsdl:input message="beatns:moveMessageToFolderRequest"></wsdl:input>
+			<wsdl:output message="beatns:moveMessageToFolderResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="moveMessageToTrash">
+			<wsdl:documentation>Verschiebt eine Nachricht (anhand der Nachrichten-Id) in den Papierkorb.</wsdl:documentation>
+			<wsdl:input message="beatns:moveMessageToTrashRequest"></wsdl:input>
+			<wsdl:output message="beatns:moveMessageToTrashResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="restoreMessageFromTrash">
+			<wsdl:documentation>Stellt eine Nachricht wiederher (aus dem Papierkorb) anhand der Nachrichten-Id. Die Nachricht wird in den Ursprungsordner zurück verschoben.</wsdl:documentation>
+			<wsdl:input message="beatns:restoreMessageFromTrashRequest"></wsdl:input>
+			<wsdl:output message="beatns:restoreMessageFromTrashResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteMessage">
+			<wsdl:documentation>Löscht eine Nachricht anhand der Nachrichten-Id.</wsdl:documentation>
+			<wsdl:input message="beatns:deleteMessageRequest"></wsdl:input>
+			<wsdl:output message="beatns:deleteMessageResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addFolder">
+			<wsdl:documentation>Erstellt einen neuen Ordner anhand eines Namen und der Id des Ordners in dem der neue Ordner erstellt werden soll.</wsdl:documentation>
+			<wsdl:input message="beatns:addFolderRequest"></wsdl:input>
+			<wsdl:output message="beatns:addFolderResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="updateFolder">
+			<wsdl:documentation>Bearbeitet einen bestehenden Ordner anhand der Id des Ordners. Es kann sowohl ein neuer Name, als auch ein neuer übergeordneter Ordner angegeben werden.</wsdl:documentation>
+			<wsdl:input message="beatns:updateFolderRequest"></wsdl:input>
+			<wsdl:output message="beatns:updateFolderResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="removeFolder">
+			<wsdl:documentation>Löscht einen Ordner anhand der Id des Ordners.</wsdl:documentation>
+			<wsdl:input message="beatns:removeFolderRequest"></wsdl:input>
+			<wsdl:output message="beatns:removeFolderResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addComment">
+			<wsdl:documentation>Erstellt einen Kommentar zu einer Nachricht.</wsdl:documentation>
+			<wsdl:input message="beatns:addCommentRequest"></wsdl:input>
+			<wsdl:output message="beatns:addCommentResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="updateComment">
+			<wsdl:documentation>Bearbeitet einen bestehenden Kommentar einer Nachricht.</wsdl:documentation>
+			<wsdl:input message="beatns:updateCommentRequest"></wsdl:input>
+			<wsdl:output message="beatns:updateCommentResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="removeComment">
+			<wsdl:documentation>Löscht einen Kommentar anhand der Nachrichten-Id und der Id des Kommentars.</wsdl:documentation>
+			<wsdl:input message="beatns:removeCommentRequest"></wsdl:input>
+			<wsdl:output message="beatns:removeCommentResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getVerificationResult">
+			<wsdl:documentation>Holt die Signatur Prüfergebnisse einer Nachricht anhand der Nachrichten-Id. Diese Prüfergebnisse sind erst verfügbar wenn eine Signatur-Prüfung der Nachricht über die Weboberfläche durchgeführt wurde.</wsdl:documentation>
+			<wsdl:input message="beatns:getVerificationResultRequest"></wsdl:input>
+			<wsdl:output message="beatns:getVerificationResultResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getVerificationConfig">
+			<wsdl:documentation>Holt die für eine eigene Signatur-Prüfung notwendigen Einstellungen - die Server-URL und das Server-Signaturzertifikat.</wsdl:documentation>
+			<wsdl:input message="beatns:getVerificationConfigRequest"></wsdl:input>
+			<wsdl:output message="beatns:getVerificationConfigResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getMessageConfig">
+			<wsdl:documentation>Holt die Nachrichten-Konfiguration - die max. Anhangsgröße, die max. Anzahl an Anhängen und eine Liste der verbotenen Dateiendungen.</wsdl:documentation>
+			<wsdl:input message="beatns:getMessageConfigRequest"></wsdl:input>
+			<wsdl:output message="beatns:getMessageConfigResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="loginUser">
+			<wsdl:documentation>Führt den Login eines Benutzers auf dem beA-System durch. Hierfür wird ein valider SAML-Token benötigt.</wsdl:documentation>
+			<wsdl:input message="beatns:loginUserRequest"></wsdl:input>
+			<wsdl:output message="beatns:loginUserResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="logoutUser">
+			<wsdl:documentation>Führt den Logout eines Benutzers anhand der Id der zugehörigen Session durch.</wsdl:documentation>
+			<wsdl:input message="beatns:logoutUserRequest"></wsdl:input>
+			<wsdl:output message="beatns:logoutUserResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="startLoginUser">
+			<wsdl:documentation>Initialisiert den Login eines Benutzers auf dem beA-System.</wsdl:documentation>
+			<wsdl:input message="beatns:startLoginUserRequest"></wsdl:input>
+			<wsdl:output message="beatns:startLoginUserResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getConfiguration">
+			<wsdl:documentation>Holt die Konfigurationsdaten für die Durchführeung einer SAML-Authentifizierung.</wsdl:documentation>
+			<wsdl:input message="beatns:getConfigurationRequest"></wsdl:input>
+			<wsdl:output message="beatns:getConfigurationResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getUserName">
+			<wsdl:documentation>Holt den Benutzernamen zu einer zugehörigen SafeId.</wsdl:documentation>
+			<wsdl:input message="beatns:getUserNameRequest"></wsdl:input>
+			<wsdl:output message="beatns:getUserNameResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getUserJournal">
+			<wsdl:documentation>Holt das Nutzerjournal anhand der SafeId eines Benutzers.</wsdl:documentation>
+			<wsdl:input message="beatns:getUserJournalRequest"></wsdl:input>
+			<wsdl:output message="beatns:getUserJournalResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteAuthentification">
+			<wsdl:documentation>Löscht einen Sicherheits-Token anhand seines Namen (für den gerade eingeloggten Benutzer).</wsdl:documentation>
+			<wsdl:input message="beatns:deleteAuthentificationRequest"></wsdl:input>
+			<wsdl:output message="beatns:deleteAuthentificationResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addAuthentification">
+			<wsdl:documentation>Fügt einen Sicherheits-Token hinzu (für den gerade eingeloggten Benutzer).</wsdl:documentation>
+			<wsdl:input message="beatns:addAuthentificationRequest"></wsdl:input>
+			<wsdl:output message="beatns:addAuthentificationResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="startRegistration">
+			<wsdl:documentation>Startet die Registrierung eines Benutzers.</wsdl:documentation>
+			<wsdl:input message="beatns:startRegistrationRequest"></wsdl:input>
+			<wsdl:output message="beatns:startRegistrationResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="finishRegistration">
+			<wsdl:documentation>Schließt die Registrierung eines Benutzers ab.</wsdl:documentation>
+			<wsdl:input message="beatns:finishRegistrationRequest"></wsdl:input>
+			<wsdl:output message="beatns:finishRegistrationResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getAddressbook">
+			<wsdl:documentation>Holt das Adressbuch des gerade eingeloggten Benutzers.</wsdl:documentation>
+			<wsdl:input message="beatns:getAddressbookRequest"></wsdl:input>
+			<wsdl:output message="beatns:getAddressbookResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteAddressbookEntry">
+			<wsdl:documentation>Löscht einen Adressbuch-Eintrag anhand der SafeId des zu löschenden Benutzers.</wsdl:documentation>
+			<wsdl:input message="beatns:deleteAddressbookEntryRequest"></wsdl:input>
+			<wsdl:output message="beatns:deleteAddressbookEntryResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addAddressbookEntry">
+			<wsdl:documentation>Fügt einen Adressbuch-Eintrag zum eigenen Adressbuch hinzu anhand der SafeId des hinzuzufügenden Benutzers.</wsdl:documentation>
+			<wsdl:input message="beatns:addAddressbookEntryRequest"></wsdl:input>
+			<wsdl:output message="beatns:addAddressbookEntryResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getRecipientData">
+			<wsdl:documentation>Holt einen Empfänger anhand der SafeId des Empfängers.</wsdl:documentation>
+			<wsdl:input message="beatns:getRecipientDataRequest"></wsdl:input>
+			<wsdl:output message="beatns:getRecipientDataResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getIdentityData">
+			<wsdl:documentation>Holt die Identität eines Benutzers anhand seiner SafeId.</wsdl:documentation>
+			<wsdl:input message="beatns:getIdentityDataRequest"></wsdl:input>
+			<wsdl:output message="beatns:getIdentityDataResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addUser">
+			<wsdl:documentation>Erstellt einen neuen Mitarbeiter für einen Postfachbesitzer anhand der SafeId des Postfachbesitzers. Es müssen Geschlecht, Titel, Vor- und Nachname spezifiziert werden.</wsdl:documentation>
+			<wsdl:input message="beatns:addUserRequest"></wsdl:input>
+			<wsdl:output message="beatns:addUserResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="updateUser">
+			<wsdl:documentation>Bearbeitet einen Mitarbeiter anhand der SafeId des Mitarbeiters. Es können Geschlecht, Titel, Vor- und Nachname bearbeitet werden.</wsdl:documentation>
+			<wsdl:input message="beatns:updateUserRequest"></wsdl:input>
+			<wsdl:output message="beatns:updateUserResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteUser">
+			<wsdl:documentation>Löscht einen Mitarbeiter anhand der SafeId des Mitarbeiters.</wsdl:documentation>
+			<wsdl:input message="beatns:deleteUserRequest"></wsdl:input>
+			<wsdl:output message="beatns:deleteUserResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addAccessRight">
+			<wsdl:documentation>Erteilt einem Benutzer ein mitgegebens Recht auf einem Postfach. Hierfür werden das Recht, die SafeId des Postfaches und die SafeId des Rechte-Empfängers übergeben.</wsdl:documentation>
+			<wsdl:input message="beatns:addAccessRightRequest"></wsdl:input>
+			<wsdl:output message="beatns:addAccessRightResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteAccessRight">
+			<wsdl:documentation>Löscht einem Benutzer ein mitgegebens Recht auf einem Postfach. Hierfür werden das Recht, die SafeId des Postfaches und die SafeId des Rechte-Inhabers übergeben.</wsdl:documentation>
+			<wsdl:input message="beatns:deleteAccessRightRequest"></wsdl:input>
+			<wsdl:output message="beatns:deleteAccessRightResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getPostboxJournal">
+			<wsdl:documentation>Holt das Postfachjournal anhand der SafeId eines Benutzers.</wsdl:documentation>
+			<wsdl:input message="beatns:getPostboxJournalRequest"></wsdl:input>
+			<wsdl:output message="beatns:getPostboxJournalResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getMessageJournal">
+			<wsdl:documentation>Holt das Nachrichtenjournal anhand einer Nachrichten-Id.</wsdl:documentation>
+			<wsdl:input message="beatns:getMessageJournalRequest"></wsdl:input>
+			<wsdl:output message="beatns:getMessageJournalResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getPostboxes">
+			<wsdl:documentation>Holt eine Liste aller Postfächer für die der eingeloggte Benutzer ein Recht besitzt.</wsdl:documentation>
+			<wsdl:input message="beatns:getPostboxesRequest"></wsdl:input>
+			<wsdl:output message="beatns:getPostboxesResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getProcesscards">
+			<wsdl:documentation>Holt eine Liste aller in einem Postfach noch nicht entschlüsselten Laufzettel anhand der SafeId des Postfaches.</wsdl:documentation>
+			<wsdl:input message="beatns:getProcesscardsRequest"></wsdl:input>
+			<wsdl:output message="beatns:getProcesscardsResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="setProcesscards">
+			<wsdl:documentation>Ersetzt noch nicht entschlüsselte Laufzettel mit dem entschlüsselten Laufzettel. Hierbei werden nur die Laufzettel ersetzt welche entschlüsselt übergeben werden.</wsdl:documentation>
+			<wsdl:input message="beatns:setProcesscardsRequest"></wsdl:input>
+			<wsdl:output message="beatns:setProcesscardsResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="activateAuthentication">
+			<wsdl:documentation>Schaltet einen Sicherheits-Token eines Postfachs anhand des Sicherheits-Token und der SafeId des Postfachs frei.</wsdl:documentation>
+			<wsdl:input message="beatns:activateAuthenticationRequest"></wsdl:input>
+			<wsdl:output message="beatns:activateAuthenticationResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getUnactivatedSecurityTokens">
+			<wsdl:documentation>Holt alle noch nicht freigeschalteten Sicherheits-Token eines Postfachs anhand der SafeId des Postfachs.</wsdl:documentation>
+			<wsdl:input message="beatns:getUnactivatedSecurityTokensRequest"></wsdl:input>
+			<wsdl:output message="beatns:getUnactivatedSecurityTokensResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getAccessRights">
+			<wsdl:documentation>Holt eine Liste aller Rechte des gerade eingeloggten Benutzers.</wsdl:documentation>
+			<wsdl:input message="beatns:getAccessRightsRequest"></wsdl:input>
+			<wsdl:output message="beatns:getAccessRightsResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getAccessRightsGranted">
+			<wsdl:documentation>Holt eine Liste aller Rechte die auf Postfächern vergeben sind die der gerade eingeloggte Benutzer verwalten darf.</wsdl:documentation>
+			<wsdl:input message="beatns:getAccessRightsGrantedRequest"></wsdl:input>
+			<wsdl:output message="beatns:getAccessRightsGrantedResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getMessageOverview">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="beatns:getMessageOverviewRequest"></wsdl:input>
+			<wsdl:output message="beatns:getMessageOverviewResponse"></wsdl:output>
+			<wsdl:fault name="BeaFault" message="beatns:BeaFault"></wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="beAServiceV5HttpBinding" type="beAServiceV5PortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getMessage">
+			<soap:operation soapAction="http://brak.bea/getMessage" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="createNewMessage">
+			<soap:operation soapAction="http://brak.bea/createNewMessage" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="saveMessage">
+			<soap:operation
+				soapAction="http://brak.bea/saveMessage" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="sendMessage">
+			<soap:operation
+				soapAction="http://brak.bea/sendMessage" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getFolderStructure">
+			<soap:operation
+				soapAction="http://brak.bea/getFolderStructure" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getFolderOverview">
+			<soap:operation
+				soapAction="http://brak.bea/getFolderOverview" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="searchAddressee">
+			<soap:operation
+				soapAction="http://brak.bea/searchAddressee" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getFavouriteAddressee">
+			<soap:operation
+				soapAction="http://brak.bea/getFavouriteAddressee" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteFavouriteAddressee">
+			<soap:operation
+				soapAction="http://brak.bea/deleteFavouriteAddressee" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="moveMessageToFolder">
+			<soap:operation
+				soapAction="http://brak.bea/moveMessageToFolder" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="moveMessageToTrash">
+			<soap:operation
+				soapAction="http://brak.bea/moveMessageToTrash" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="restoreMessageFromTrash">
+			<soap:operation
+				soapAction="http://brak.bea/restoreMessageFromTrash" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteMessage">
+			<soap:operation
+				soapAction="http://brak.bea/deleteMessage" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addFolder">
+			<soap:operation
+				soapAction="http://brak.bea/addFolder" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="updateFolder">
+			<soap:operation
+				soapAction="http://brak.bea/updateFolder" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="removeFolder">
+			<soap:operation
+				soapAction="http://brak.bea/removeFolder" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addComment">
+			<soap:operation
+				soapAction="http://brak.bea/addComment" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="updateComment">
+			<soap:operation
+				soapAction="http://brak.bea/updateComment" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="removeComment">
+			<soap:operation
+				soapAction="http://brak.bea/removeComment" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getUserName">
+			<soap:operation
+				soapAction="http://brak.bea/getUserName" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getUserJournal">
+			<soap:operation
+				soapAction="http://brak.bea/getUserJournal" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteAuthentification">
+			<soap:operation
+				soapAction="http://brak.bea/deleteAuthentification" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addAuthentification">
+			<soap:operation
+				soapAction="http://brak.bea/addAuthentification" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="startRegistration">
+			<soap:operation
+				soapAction="http://brak.bea/startRegistration" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="finishRegistration">
+			<soap:operation
+				soapAction="http://brak.bea/finishRegistration" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="loginUser">
+			<soap:operation
+				soapAction="http://brak.bea/loginUser" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="logoutUser">
+			<soap:operation
+				soapAction="http://brak.bea/logoutUser" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="startLoginUser">
+			<soap:operation
+				soapAction="http://brak.bea/startLoginUser" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addUser">
+			<soap:operation soapAction="http://brak.bea/addUser" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="updateUser">
+			<soap:operation
+				soapAction="http://brak.bea/updateUser" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteUser">
+			<soap:operation
+				soapAction="http://brak.bea/deleteUser" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addAccessRight">
+			<soap:operation
+				soapAction="http://brak.bea/addAccessRight" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteAccessRight">
+			<soap:operation
+				soapAction="http://brak.bea/deleteAccessRight" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getPostboxJournal">
+			<soap:operation
+				soapAction="http://brak.bea/getPostboxJournal" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getMessageJournal">
+			<soap:operation
+				soapAction="http://brak.bea/getMessageJournal" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getAddressbook">
+			<soap:operation
+				soapAction="http://brak.bea/getAddressbook" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="deleteAddressbookEntry">
+			<soap:operation
+				soapAction="http://brak.bea/deleteAddressbookEntry" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="addAddressbookEntry">
+			<soap:operation
+				soapAction="http://brak.bea/addAddressbookEntry" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getVerificationResult">
+			<soap:operation
+				soapAction="http://brak.bea/getVerificationResult" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getVerificationConfig">
+			<soap:operation
+				soapAction="http://brak.bea/getVerificationConfig" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getMessageConfig">
+			<soap:operation
+				soapAction="http://brak.bea/getMessageConfig" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getConfiguration">
+			<soap:operation
+				soapAction="http://brak.bea/getConfiguration" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getRecipientData">
+			<soap:operation
+				soapAction="http://brak.bea/getRecipientData" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getIdentityData">
+			<soap:operation
+				soapAction="http://brak.bea/getIdentityData" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getPostboxes">
+			<soap:operation
+				soapAction="http://brak.bea/getPostboxes" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="getProcesscards">
+			<soap:operation
+				soapAction="http://brak.bea/getProcesscards" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+	
+		<wsdl:operation name="setProcesscards">
+			<soap:operation
+				soapAction="http://brak.bea/setProcesscards" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getAccessRights">
+			<soap:operation
+				soapAction="http://brak.bea/getAccessRights" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getAccessRightsGranted">
+			<soap:operation
+				soapAction="http://brak.bea/getAccessRightsGranted" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getMessageOverview">
+			<soap:operation
+				soapAction="http://brak.bea/getMessageOverview" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="BeaFault">
+				<soap:fault use="literal" name="BeaFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="beAServiceV5">
+		<wsdl:port name="beAServiceV5HttpPort" binding="beAServiceV5HttpBinding">
+			<soap:address location="https://www.brak.de/bea/BeAServiceV5" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

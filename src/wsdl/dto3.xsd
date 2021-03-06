@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:beadto1="http://brak.de/bea/application/dto/soap/dto1"
+            xmlns:beadto2="http://brak.de/bea/application/dto/soap/dto2"
+            xmlns:beadto3="http://brak.de/bea/application/dto/soap/dto3"
+			attributeFormDefault="qualified"
+			elementFormDefault="qualified"
+			targetNamespace="http://brak.de/bea/application/dto/soap/dto3">
+            
+    <xsd:import namespace="http://brak.de/bea/application/dto/soap/dto1" schemaLocation="dto1.xsd"/>   
+    <xsd:import namespace="http://brak.de/bea/application/dto/soap/dto2" schemaLocation="dto2.xsd"/>
+    
+    <xsd:complexType name="AuthentConfigurationSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="address" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Adresse des Authentifizierungs-Servers (SAFE-BRAK).</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="provider" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des Diensteanbieters für die Anmeldung.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="sigAlgorithm" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des Signatur-Algorithmus.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="receiverServlet" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die URL des Receiver Servlets.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="untrustedCertificate" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das SSL-Zertifikat eines Testservers(nur für Testbetrieb).</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="asymmetricSessionKeyAlgorithm" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des Padding Verfahrens, der bei der Verschlüsselung des Nachrichtneschlüssels verwendet wird.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="asymmetricMessageAlgorithm" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des Padding Verfahrens, der bei der Verschlüsselung des Session Key verwendet wird.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="signatureScheme" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des Padding Verfahrens, der bei der Erstellung von Signaturen verwendet wird.</xsd:documentation></xsd:annotation></xsd:element>					
+        </xsd:sequence>
+    </xsd:complexType>
+    
+</xsd:schema>

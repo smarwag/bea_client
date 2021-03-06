@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:beadto1="http://brak.de/bea/application/dto/soap/dto1"
+			attributeFormDefault="qualified"
+			elementFormDefault="qualified"
+			targetNamespace="http://brak.de/bea/application/dto/soap/dto1">
+
+    <xsd:complexType name="BeAFaultSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="faultId" type="xsd:long"></xsd:element>
+            <xsd:element name="faultCode" type="xsd:string"></xsd:element>
+            <xsd:element name="faultMessage" type="xsd:string"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MessageSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="osciMessageId" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die OSCI Nachrichten-Id.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="osciSubject" type="beadto1:OSCISubjectTypeSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der OSCI Betreff der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="attachments" type="beadto1:AttachmentSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Die Anhänge der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="encryptedObject" type="beadto1:EncryptedObjectSoapDTO" maxOccurs="unbounded" minOccurs="1"><xsd:annotation><xsd:documentation>Die verschlüsselten Bestandteile einer Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="metaData" type="beadto1:MetaDataSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Meta-Daten der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="newEGVPMessage" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Flag für neu eigegangene EGVP-Nachricht (noch kein Laufzettel entschlüsselt).</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="certificateMap" type="beadto1:CertificateMapSoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Eine Zertifikats-Map für jedes in der Nachricht vorkommende Postfach.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="version" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Versionsnummer der Nachricht in der Datenbank.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="SecurityTokenTypeSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="HW"><xsd:annotation><xsd:documentation>Typ des Sicherheits-Token: Hardware Sicherheits-Token</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="SW"><xsd:annotation><xsd:documentation>Typ des Sicherheits-Token: Software Sicherheits-Token</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="SecurityTokenSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="tokenId" type="xsd:long" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Id des Sicherheits-Token.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="tokenName" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des Sicherheits-Token.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="tokenType" type="beadto1:SecurityTokenTypeSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Typ des Sicherheits-Token.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="authCertificate" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Authentifizierungs-Zertifikat des Benutzers.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="cryptoCertificate" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Verschlüsselungs-Zertifikat des Benutzers.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="SignedPrivilegeTypeSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CRYPTO"><xsd:annotation><xsd:documentation>Typ des signierten Rechts: Verschlüsselung</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="AUTH"><xsd:annotation><xsd:documentation>Typ des signierten Rechts: Authentifizierung</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="SignedPrivilegeSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="privilegeType" type="beadto1:SignedPrivilegeTypeSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Typ des signierten Rechts.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeID des Postfachs für das das signierte Recht ausgestellt ist.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="signature" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das signierte Recht.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="UsernamePasswordSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="username" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Benutzername des neuen Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="password" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Passwort des neuen Mitarbeiters.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SAMLResponseSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="sessionId" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Id der Session für die der SAML-Response erstellt wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="samlResponse" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SAML-Response.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="authCertificate" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Authentifizierungs-Zertifikat.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CertificateMapSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="certificateEntry" type="beadto1:CertificateEntrySoapDTO" maxOccurs="unbounded" minOccurs="1"><xsd:annotation><xsd:documentation>Ein Zertifikatseintrag für ein in der Nachricht vorkommendes Postfach.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CertificateEntrySoapDTO">
+        <xsd:sequence>
+            <xsd:element name="reference" type="xsd:string"><xsd:annotation><xsd:documentation>Die SafeID des Postfachs zu dem das Zertifikat gehört.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="certificate" type="xsd:base64Binary"><xsd:annotation><xsd:documentation>Das Zertifikat in base64 kodierter Binärdarstellung.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="OSCISubjectTypeSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ALLGEMEINE_NACHRICHT"><xsd:annotation><xsd:documentation>OSCISubjectType: Allgemeine Nachricht</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="HR_BETEILIGTER"><xsd:annotation><xsd:documentation>OSCISubjectType: HR-Beteiligter</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="HR_GERICHT"><xsd:annotation><xsd:documentation>OSCISubjectType: HR-Gericht</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="MAHN_ANTRAG"><xsd:annotation><xsd:documentation>OSCISubjectType: Mahn-Antrag</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="MAHN_NACHRICHT"><xsd:annotation><xsd:documentation>OSCISubjectType: Mahn-Nachricht</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="MAHN_ABGABE"><xsd:annotation><xsd:documentation>OSCISubjectType: Mahn-Abgabe</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="TESTNACHRICHT"><xsd:annotation><xsd:documentation>OSCISubjectType: Testnachricht</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="UBEST_MAHN"><xsd:annotation><xsd:documentation>OSCISubjectType: Ubest-Mahn</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="AttachmentSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="reference" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Referenz auf die angehängte Datei: Dateiname</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="alias" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Alias des Anhangs.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="data" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der verschlüsselte Anhang in base64 kodierter Binärdarstellung.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="key" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der verschlüsselte Nachrichtenschlüssel.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="type" type="beadto1:AttachmentTypeSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Typ des Anhangs.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="sizeKB" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Größe des (unverschlüsselten) Anhangs in KB.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="sizeEncryptedKB" type="xsd:long" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Größe des (verschlüsselten) Anhangs in KB.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="hashValue" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Hash-Wert (SHA256) des Anhangs.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="AttachmentTypeSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SCHRIFTSATZ"><xsd:annotation><xsd:documentation>Typ des Anhangs: Schriftsatz</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="ATTACHMENT"><xsd:annotation><xsd:documentation>Typ des Anhangs: Anlage</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="EB"><xsd:annotation><xsd:documentation>Typ des Anhangs: EB</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="EMPTY"><xsd:annotation><xsd:documentation>Typ des Anhangs: -leer-</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="EncryptedObjectSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="enc_data" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die verschlüsselten Daten des Objekts.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="enc_name" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des verschlüsselten Objekts.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="encKeyInfo" type="beadto1:EncKeyInfoSoapDTO" maxOccurs="unbounded" minOccurs="1"><xsd:annotation><xsd:documentation>Die Schlüsselinformationen zum verschlüsselten Objekt.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="EncKeyInfoSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="encKey" type="beadto1:EncryptedDataSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Daten-Objekt zu den Schlüsselinformationen.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="encCertificate" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Verschlüsselungs-Zertifikat des Postfachs.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="safeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeID des Postfachs.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="EncryptedDataSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="iv" type="xsd:base64Binary" minOccurs="1" maxOccurs="1"><xsd:annotation><xsd:documentation>Der Initialisierungsvektor, der bei der Umschlüsselung verwendet wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="value" type="xsd:base64Binary" minOccurs="1" maxOccurs="1"><xsd:annotation><xsd:documentation>Das Kryptogramm des umgeschlüsselten Nachrichtenschlüssels.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="tag" type="xsd:base64Binary" minOccurs="1" maxOccurs="1"><xsd:annotation><xsd:documentation>Das Authentifizierungstag des umgeschlüsselten Nachrichtenschlüssels (dient zur Integritätsprüfung).</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MessageInfoSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="sender" type="beadto1:IdentitySoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Absender der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="referenceNumber" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Aktenzeichen Sender.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="referenceNumberOpposition" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Aktenzeichen der Gegenseite.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="referenceNumberJustice" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Aktenzeichen Empfänger.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="created" type="xsd:dateTime" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Zeitpunkt an dem die Nachricht erstellt wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="sent" type="xsd:dateTime" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Zeitpunkt an dem die Nachricht versandt wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="received" type="xsd:dateTime" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Zeitpunkt an dem die Nachricht empfangen wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="appointment" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="urgent" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachricht gilt als "Dringend".</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="checkRequired" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachricht gilt als "Zu prüfen".</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="confidential" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachricht gilt als "Persönlich/vertraulich".</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="folderId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id des Ordners in dem die Nachricht liegt.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="addressees" type="beadto1:IdentityListSoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Empfänger der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="attributes" type="beadto1:AttributeSoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="comments" type="beadto1:CommentSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Die Kommentare der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="labels" type="beadto1:LabelSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="attachments" type="beadto1:AttachmentSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Die unverschlüsselten Informationen über die Anhänge der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="readFlags" type="beadto1:IdentityListSoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Eine Liste der Benutzer welche die Nachricht bereits gelesen haben.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="RecipientSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="safeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeID des Absenders/Empfängers.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des Absenders/Empfängers.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="certificate" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Empfänger-Zertifikat.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MetaDataSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="receptionTime" type="xsd:dateTime" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Zeitpunkt zu dem die Nachricht empfangen wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="sender" type="beadto1:RecipientSoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Absender der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="addressee" type="beadto1:RecipientSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Der/Die Empfänger der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="subject" type="beadto1:EncryptedDataSoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Betreff der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="referenceNumber" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Aktenzeichen Sender.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="referenceNumberOpposition" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Aktenzeichen der Gegenseite.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="referenceJustice" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Aktenzeichen Empfänger.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="messageSigned" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn die Nachricht signiert ist. "false": wenn die Nachricht nicht signiert ist.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="oneAttachmentSigned" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn mind. ein Anhang signiert ist. "false": wenn kein Anhang signiert ist.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="urgent" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachricht gilt als "Dringend".</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="checkRequired" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachricht gilt als "Zu prüfen".</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="confidential" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Nachricht gilt als "Persönlich/vertraulich".</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="appointment" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="originatorCertificate" type="xsd:base64Binary" maxOccurs="1" minOccurs="0"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SessionKeySoapDTO">
+        <xsd:sequence>
+            <xsd:element name="sessionKey" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der verschlüsselte Session Key für die aktuelle Session.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="encrypteddata" type="beadto1:EncryptedDataSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Ein verschlüsselter Wert für die Überprüfung des ausgestellten Session-Keys.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="safeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeID des gerade angemeldeten Benutzers.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="PostboxesSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="postbox" type="beadto1:PostboxSoapDTO" maxOccurs="unbounded" minOccurs="1"><xsd:annotation><xsd:documentation>Alle Postfächer auf denen der eingeloggte Benutzer das Recht "Nachrichtenübersicht öffnen" besitzt.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="PostboxSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeID des Postfachs.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="folder" type="beadto1:FolderSoapDTO" maxOccurs="unbounded" minOccurs="1"><xsd:annotation><xsd:documentation>Alle Ordner die zu diesem Postfach gehören.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="label" type="beadto1:LabelSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Alle Etiketten die zu diesem Postfach gehören.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="FolderSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:long" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Id des Ordners.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="type" type="beadto1:FolderTypeSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Ordnertyp des Ordners.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des Ordners.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeID des Postfachs zu dem dieser Ordner gehört.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="parentFolderId" type="xsd:long" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Id des Ordners in dem dieser Ordner liegt.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="childFolder" type="beadto1:FolderSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Die Ids der Ordner die in diesem Ordner liegen.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="LabelSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:long"><xsd:annotation><xsd:documentation>Die Id des Etiketts.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="name" type="xsd:string"><xsd:annotation><xsd:documentation>Der Name des Etiketts.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="color" type="xsd:string"><xsd:annotation><xsd:documentation>Die Farbe des Etiketts.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="postboxSafeId" type="xsd:string"><xsd:annotation><xsd:documentation>Die SafeID des Postfachs zu dem dieses Etikett gehört.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="FolderTypeSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="INBOX"><xsd:annotation><xsd:documentation>Ordnertyp: Posteingang</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="OUTBOX"><xsd:annotation><xsd:documentation>Ordnertyp: Postausgang</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="SENT"><xsd:annotation><xsd:documentation>Ordnertyp: Gesendet</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="DRAFT"><xsd:annotation><xsd:documentation>Ordnertyp: Entwürfe</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="TRASH"><xsd:annotation><xsd:documentation>Ordnertyp: Papierkorb</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="CUSTOM"><xsd:annotation><xsd:documentation>Ordnertyp: Benutzerdefiniert. Dieser Typ wird für Ordner verwendet welche von einem Benutzer manuell angelegt werden.</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="FolderOverviewSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="messageOverview" type="beadto1:MessageOverviewSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Eine Liste aller Nachrichten in einem Ordner.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MessageOverviewSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="messageId" type="xsd:long"><xsd:annotation><xsd:documentation>Die Id der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="encSubject" type="beadto1:EncryptedDataSoapDTO"><xsd:annotation><xsd:documentation>Der verschlüsselte Betreff der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SearchAddresseeSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="identitySafeId" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die SafeID des gesuchten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="identityStatus " type="beadto1:IdentityStatusSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Der Status des gesuchten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="identityType" type="beadto1:IdentityTypeSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Der Typ des gesuchten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="identityUsername" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Benutzername des gesuchten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="identityFirstname" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Vorname des gesuchten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="identitySurname" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Nachname des gesuchten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="identityPostalcode" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Postleitzahl des gesuchten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="identityCity" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Ort des gesuchten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="identityChamberType" type="beadto1:ChamberTypeSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Die RAK des gesuchten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="identityChamberMembershipId" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die (Kammer-)Mitgliedsnummer des gesuchten Adressaten.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="IdentityListSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="addressee" type="beadto1:IdentitySoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Eine Liste von Identitäten.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="IdentitySoapDTO">
+        <xsd:sequence>
+            <xsd:element name="identityId" type="xsd:long" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Id der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="safeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="status" type="beadto1:IdentityStatusSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Status der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="type" type="beadto1:IdentityTypeSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Typ der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="formOfAdress" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Art der Anrede der Identität (Herr/Frau).</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="title" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Titel der Identität (Dr. usw.).</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="username" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Benutzername der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="firstname" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Vorname der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="surname" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Nachname der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="street" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Straße der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="streetnumber" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Straßennummer der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="postalcode" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Postleitzahl der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="city" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Ort der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="federalState" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Das Bundesland der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="country" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Das Land der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="email" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Email-Adresse der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="phone" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Telefonnummer der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="mobile" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Mobilnummer der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="fax" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Faxnummer der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="organization" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Organisation der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="organizationExtension" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der Organisations-Zusatz der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="chamber" type="beadto1:ChamberTypeSoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Rechtsanwaltskammer der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="chamberMembershipId" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die (Kammer-)Mitgliedsnummer der Identität.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="IdentityStatusSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CREATED"><xsd:annotation><xsd:documentation>Status der Identität: beantragt</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PREPARED_ACTIVE"><xsd:annotation><xsd:documentation>Status der Identität: vorbereitet aktiv</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="COMPLETLY_ACTIVE"><xsd:annotation><xsd:documentation>Status der Identität: vollständig aktiv</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="COMPLETLY_INACTIVE"><xsd:annotation><xsd:documentation>Status der Identität: vollständig inaktiv</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="IdentityTypeSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="RECHTSANWALT"><xsd:annotation><xsd:documentation>Typ der Identität: Rechtsanwalt</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="NICHT_RECHTSANWALT_BEVOLLMAECHTIGTER"><xsd:annotation><xsd:documentation>Typ der Identität: Nicht-RA-Bevollmächtigter</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="EHEMALIGER_POSTFACHBESITZER"><xsd:annotation><xsd:documentation>Typ der Identität: Ehemaliger Postfachbesitzer</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="MITARBEITER"><xsd:annotation><xsd:documentation>Typ der Identität: Mitarbeiter</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="BENUTZER"><xsd:annotation><xsd:documentation>Typ der Identität: Benutzer</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="BRAK"><xsd:annotation><xsd:documentation>Typ der Identität: BRAK</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="RAK"><xsd:annotation><xsd:documentation>Typ der Identität: RAK</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="ANWALTSGERICHT"><xsd:annotation><xsd:documentation>Typ der Identität: Anwaltsgericht</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="SCHLICHTUNGSSTELLE"><xsd:annotation><xsd:documentation>Typ der Identität: Schlichtungsstelle der Rechtsanwaltschaft</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="BEA_ANWENDUNG"><xsd:annotation><xsd:documentation>Typ der Identität: beA-Anwendung</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="JUSTIZ"><xsd:annotation><xsd:documentation>Typ der Identität: Justiz</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="SYSTEMBENUTZER"><xsd:annotation><xsd:documentation>Typ der Identität: Systembenutzer</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:simpleType name="GenderSoapTypeDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Herr"><xsd:annotation><xsd:documentation>Geschlecht: männlich</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="Frau"><xsd:annotation><xsd:documentation>Geschlecht: weiblich</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ChamberTypeSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="B"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Berlin</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="BA"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Bamberg</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="BGH"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer bei dem Bundesgerichtshof</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="BRB"><xsd:annotation><xsd:documentation>Brandenburgische Rechtsanwaltskammer</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="BS"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer für den Oberlandesgerichtsbezirk Braunschweig</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="CE"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer für den Oberlandesgerichtsbezirk Celle</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="D"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Düsseldorf</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="DD"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Sachsen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="EF"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Thüringen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="F"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Frankfurt</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="FR"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Freiburg</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="HAM"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer für den Oberlandesgerichtsbezirk Hamm</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="HB"><xsd:annotation><xsd:documentation>Hanseatische Rechtsanwaltskammer Bremen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="HH"><xsd:annotation><xsd:documentation>Hanseatische Rechtsanwaltskammer Hamburg</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="K"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Köln</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="KA"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Karlsruhe</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="KO"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Koblenz</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="KS"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Kassel</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="M"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer für den Oberlandesgerichtsbezirk München</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="MD"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer des Landes Sachsen-Anhalt</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="N"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Nürnberg</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="OL"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer für den Oberlandesgerichtsbezirk Oldenburg</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="S"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Stuttgart</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="SB"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer des Saarlands</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="SL"><xsd:annotation><xsd:documentation>Schleswig-Holsteinische Rechtsanwaltskammer</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="SN"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Mecklenburg-Vorpommern</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="TÜ"><xsd:annotation><xsd:documentation>Rechtsanwaltskammer Tübingen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="TST"><xsd:annotation><xsd:documentation>TEST-Rechtsanwaltskammer</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="ZW"><xsd:annotation><xsd:documentation>Pfälzische Rechtsanwaltskammer Zweibrücken</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="SRAS"><xsd:annotation><xsd:documentation>Schlichtungsstelle der Rechtsanwaltschaft</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="BRAK"><xsd:annotation><xsd:documentation>Bundesrechtsanwaltskammer</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="CommentSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:long" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Id des Kommentars.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der Nachricht zum welcher der Kommentar gehört.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="creatorIdentitySafeId" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die SafeId der Identität welche den Kommentar erstellt hat.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="creationDate" type="xsd:date" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das Erstellungsdatum des Kommentars.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="comment" type="xsd:string"><xsd:annotation><xsd:documentation>Die Nachricht des Kommentars.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="done" type="xsd:boolean" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>"true": wenn der Kommentar als "Erledigt" markiert wurde. "false": wenn der Kommentar nicht als "Erledigt" markiert wurde.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="AuthentificationTypeSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="nPA"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="Certificate"><xsd:annotation><xsd:documentation>Authentifizierung über ein Zertifikat.</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="AttributeListSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="attribute" type="beadto1:AttributeSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="AttributeSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="checkRequired" type="xsd:boolean"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="urgent" type="xsd:boolean"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="PrivilegeTypeSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="PRV_UEBERSICHT_UEBER_POSTFACH"><xsd:annotation><xsd:documentation>Recht: Nachrichtenübersicht öffnen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VOLLSTAENDIGES_LESEN"><xsd:annotation><xsd:documentation>Recht: Nachricht öffnen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_LESEN_PERSOENLICH_VERTRAULICH"><xsd:annotation><xsd:documentation>Recht: Nachricht (persönlich/vertraulich) öffnen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_ORGANISIEREN_EINER_NACHRICHT"><xsd:annotation><xsd:documentation>Recht: Nachricht organisieren</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERSCHIEBEN_IN_PAPIERKORB"><xsd:annotation><xsd:documentation>Recht: Nachricht in Papierkorb verschieben</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_ENDGUELTIGES_LOESCHEN"><xsd:annotation><xsd:documentation>Recht: Nachricht löschen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_ERSTELLEN_VON_NACHRICHTENENTWUERFEN"><xsd:annotation><xsd:documentation>Recht: Nachricht erstellen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_ANTWORTEN_VOM_EIGENEN_POSTFACH"><xsd:annotation><xsd:documentation>Recht: Antworten vom eigenem Postfach für Abwickler</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_SIGNIEREN_VON_NICHT_PERSOENLICHEN_EBS"><xsd:annotation><xsd:documentation>Recht: EBs signieren</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERSENDEN_VON_NICHT_PERSOENLICHEN_EBS"><xsd:annotation><xsd:documentation>Recht: EBs versenden </xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_SIGNIEREN_VON_PERSOENLICHEN_EBS"><xsd:annotation><xsd:documentation>Recht: EBs signieren (persönlich/vertrauliche Nachrichten)</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERSENDEN_VON_PERSOENLICHEN_EBS"><xsd:annotation><xsd:documentation>Recht: EBs versenden (persönlich/vertrauliche Nachrichten)</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_SIGNIEREN_VON_NACHRICHTEN"><xsd:annotation><xsd:documentation>Recht: Nachricht signieren</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERSENDEN_VON_NACHRICHTEN_AN_DEFINIERTE_POSTFAECHER"><xsd:annotation><xsd:documentation>Recht: Nachricht versenden</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_EXPORTIEREN_DRUCKEN_DER_UEBERSICHT_DES_POSTFACHS"><xsd:annotation><xsd:documentation>Recht: Nachrichtenübersicht exportieren/drucken</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_EXPORTIEREN_DRUCKEN_VON_NACHRICHTEN"><xsd:annotation><xsd:documentation>Recht: Nachricht exportieren/drucken</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_EXPORTIEREN_DRUCKEN_VON_PERSOENLICH_VERTRAULICH"><xsd:annotation><xsd:documentation>Recht: Nachricht (persönlich/vertraulich) exportieren/drucken</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_ZURUECKWEISEN_VON_NACHRICHTEN"><xsd:annotation><xsd:documentation>Recht: EBs zurückweisen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERWALTUNG_VON_MITARBEITERN"><xsd:annotation><xsd:documentation>Recht: Mitarbeiter verwalten</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERWALTUNG_VON_BERECHTIGUNGEN"><xsd:annotation><xsd:documentation>Recht: Berechtigungen verwalten</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_EINGESCHRAENKTE_PFLEGE_DES_VERZEICHNISEINTRAGS"><xsd:annotation><xsd:documentation>Recht: Verzeichnisdatenpflege persönlicher Postfächer</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_ERSTELLUNG_PERSOENLICHE_BERICHTE"><xsd:annotation><xsd:documentation>Recht: Berichte erstellen und verwalten</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERWALTUNG_VON_POSTFAECHERN"><xsd:annotation><xsd:documentation>Recht: Postfächer verwalten</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_AENDERN_DER_EIGENEN_ZUGANGSDATEN"><xsd:annotation><xsd:documentation>Recht: Ändern der eigenen Zugangsdaten</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_LOESCHEN_DER_EIGENEN_ZUGANGSDATEN"><xsd:annotation><xsd:documentation>Recht: Löschen der eigenen Zugangsdaten</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_PFLEGE_DER_VERZEICHNISSE"><xsd:annotation><xsd:documentation>Recht: Pflege der Verzeichnisse</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERWALTUNG_VON_VERTEILERN"><xsd:annotation><xsd:documentation>Recht: Verteilerlisten verwalten</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERWENDEN_SYSTEMJOURNAL"><xsd:annotation><xsd:documentation>Recht: Verwenden des Systemjournals</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_ERSTELLUNG_BERICHTE_FUER_EINE_RAK"><xsd:annotation><xsd:documentation>Recht: Berichte erstellen (RAK)</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_ERSTLLUNG_BERICHTE_FUER_DIE_BEA_ANWENDUNG"><xsd:annotation><xsd:documentation>Recht: Berichte erstellen (beA)</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_POSTFAECHER_AUFLISTEN"><xsd:annotation><xsd:documentation>Recht: Postfächer auflisten</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_POSTFACH_DETAILANSICHT"><xsd:annotation><xsd:documentation>Recht: Postfachdetails öffnen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERWENDUNG_NUTZERJOURNAL"><xsd:annotation><xsd:documentation>Recht: Verwenden Nutzerjournal</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_BENUTZER_ANZEIGEN"><xsd:annotation><xsd:documentation>Recht: Benutzer anzeigen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERWENDUNG_ADMINISTRATION"><xsd:annotation><xsd:documentation>Recht: Verwaltung von Benutzern</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_VERWENDUNG_POSTFACHJOURNAL_NACHRICHTENJOURNAL"><xsd:annotation><xsd:documentation>Recht: Postfach- und Nachrichtenjournal verwenden</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_BENUTZER_ZURUECKSETZEN"><xsd:annotation><xsd:documentation>Recht: Benutzer zurücksetzen</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PRV_SECURITY_TOKEN_LOESCHEN"><xsd:annotation><xsd:documentation>Recht: Sicherheits Token löschen</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="PrivilegeListSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="privilege" type="beadto1:PrivilegeTypeSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="JournalListSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="journals" type="beadto1:JournalSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Eine Liste an Journal-Einträgen.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="JournalSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="journalType" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Typ des Journals (Nachrichtenjournal, Postfachjournal, Benutzerjournal oder Systemjournal).</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="eventType" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Typ des Events welches den Journal-Eintrag ausgelöst hat.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Wenn es sich um ein Nachrichtenjournal-Eintrag handelt: die Id der Nachricht.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="attachmentReference" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Wenn es sich um ein Nachrichtenjournal-Eintrag handelt: der Dateiname des angehängten Anhangs.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="postboxSafeId" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Wenn es sich um ein Nachrichtenjournal-Eintrag handelt: die SafeId des Postfachs in der die Nachricht liegt welche den Journal-Eintrag ausgelöst hat. Wenn es sich um ein Postfachjournal-Eintrag handelt: die SafeID des Postfachs welche den Journal-Eintrag ausgelöst hat.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="sourceIdentity" type="beadto1:IdentitySoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Identität die den Journal-Eintrag ausgelöst hat.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="targetIdentity" type="beadto1:IdentitySoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Identität für die der Journal-Eintrag erstellt wurde.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="referenceIdentity" type="beadto1:IdentitySoapDTO" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="timestamp" type="xsd:date" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Zeitstempel des Journal-Eintrags.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="AuthentConfigurationSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="address" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Adresse des Authentifizierungs-Servers (SAFE-BRAK).</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="provider" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des Diensteanbieters für die Anmeldung.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="sigAlgorithm" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der Name des Signatur-Algorithmus.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="receiverServlet" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die URL des Receiver Servlets.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="untrustedCertificate" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das SSL-Zertifikat eines Testservers(nur für Testbetrieb).</xsd:documentation></xsd:annotation></xsd:element>					
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="PeriodSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="from" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="to" type="xsd:date" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MessageListSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="messagesSoapDTO" type="beadto1:MessagesSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MessagesSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="message" type="beadto1:MessageSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="messageInfo" type="beadto1:MessageInfoSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>deprecated</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ProcessCardSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="processCardId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id des Laufzettels.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="messageId" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die Id der Nachricht zu welcher der Laufzettel gehört.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="conversationId" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Conversation-Id aus dem entschlüsselten Laufzettel.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="type" type="xsd:long" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Typ aus dem entschlüsselten Laufzettel.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="challange" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Die Challenge-Text aus dem entschlüsselten Laufzettel.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="data" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die verschlüsselten Daten des Laufzettels.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="encKey" type="beadto1:EncryptedDataSoapDTO" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Der verschlüsselte Schlüssel für die entschlüsselung des Laufzettels.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="processCard" type="xsd:string" maxOccurs="1" minOccurs="0"><xsd:annotation><xsd:documentation>Der entschlüsselte Laufzettel als XML.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ProcessCardsSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="processcards" type="beadto1:ProcessCardSoapDTO" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Eine Liste an Laufzetteln.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="VerificationResultStatusSoapDTO">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SUCCESS"><xsd:annotation><xsd:documentation>Status des Prüfprotokolls: Erfolgreich</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="PARTIAL"><xsd:annotation><xsd:documentation>Status des Prüfprotokolls: Teilweise erfolgreich</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="FAILED"><xsd:annotation><xsd:documentation>Status des Prüfprotokolls: Fehlgeschlagen</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="VerificationResultSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="messageId" type="xsd:long"><xsd:annotation><xsd:documentation>Die Id der Nachricht zu der das Prüfprotokoll gehört.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="html" type="xsd:string"><xsd:annotation><xsd:documentation>HTML Repräsentation des Prüfprotokolls.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="xml" type="xsd:string"><xsd:annotation><xsd:documentation>XML Repräsentation des Prüfprotokolls.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="status" type="beadto1:VerificationResultStatusSoapDTO"><xsd:annotation><xsd:documentation>Status des Prüfprotokolls</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="VerificationConfigSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="serverURL" type="xsd:string" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die URL zum OCSP Relay.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="serverSignatureCertificate" type="xsd:base64Binary" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Das SSL Zertifikat des OCSP Relay.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MessageConfigurationSoapDTO">
+        <xsd:sequence>
+            <xsd:element name="maxAttachmentSizeInKB" type="xsd:long" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die maximale Größe eines Anhangs in KB.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="maxAttachmentCount" type="xsd:int" maxOccurs="1" minOccurs="1"><xsd:annotation><xsd:documentation>Die maximale Anzahl an Anhängen.</xsd:documentation></xsd:annotation></xsd:element>
+            <xsd:element name="attachmentExtensionBlacklist" type="xsd:string" maxOccurs="unbounded" minOccurs="0"><xsd:annotation><xsd:documentation>Eine Liste der verbotenen Dateiendungen eines Anhangs.</xsd:documentation></xsd:annotation></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
